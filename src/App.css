@@ -1,0 +1,116 @@
+/* App.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+.body-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('../public/background.jpg') no-repeat center center fixed;
+  padding: 30px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  position: relative;
+  max-width: 400px; /* Adjust as needed for form width */
+  width: 100%;
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.forms {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+
+.form-content .login-form,
+.form-content .signup-form {
+  width: 100%;
+}
+
+.form-content .title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-content .input-boxes {
+  margin-top: 20px;
+}
+
+.form-content .input-box {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+
+.input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+  border-color: #7d2ae8;
+}
+
+.input-box i {
+  position: absolute;
+  color: #7d2ae8;
+  font-size: 17px;
+  left: 10px;
+}
+
+.button input {
+  color: #fff;
+  background: #7d2ae8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 10px 0;
+  font-weight: 500;
+}
+
+.button input:hover {
+  background: #5b13b9;
+}
+
+.text a {
+  color: #7d2ae8;
+  text-decoration: none;
+}
+
+.text a:hover {
+  text-decoration: underline;
+}
+
+.sign-up-text {
+  margin-top: 25px;
+}
+
+@media (max-width: 730px) {
+  .container {
+    padding: 20px;
+  }
+}

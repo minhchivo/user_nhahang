@@ -1,0 +1,122 @@
+.container_trangchu {
+  max-width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.banner_trangchu {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+}
+.banner_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh vừa với kích thước của banner */
+  transition: opacity 1s ease; /* Hiệu ứng mờ khi chuyển ảnh */
+}
+
+.menu_trangchu {
+  width: 100%;
+  height: 400px;
+  margin: 20px 0;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+
+.main-foods-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Cho phép cuộn ngang */
+  gap: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.menu-item-home {
+  width: 250px;
+  flex-shrink: 0;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.menu-item-image-home {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.menu-item-name-home {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+.menu-item-price-home {
+  font-size: 1rem;
+  color: #777;
+  margin: 10px 0;
+}
+
+.view-all-link {
+  display: inline-block;
+  font-size: 1rem;
+  color: #ff6f61;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+.gioithieu {
+  display: flex;
+  flex-direction: row; 
+  width: 100%;
+  height: 400px;
+  margin-top: 60px;
+}
+
+.text_gioithieu, .imagegioithieu {
+  width: 50%; 
+  height: 100%;
+}
+.anhgioithieu{
+  width: 100%;
+  height: 100%;
+}
+.text_gioithieu {
+  padding: 20px;
+  text-align: justify; /* Căn đều */
+  font-family: 'Arial', sans-serif; /* Font chữ phù hợp xu hướng */
+  color: #333; /* Màu chữ */
+}
+
+.tieudegioithieu {
+  text-align: center;
+  font-weight: bold; /* In đậm */
+  font-size: 32px; /* Kích thước chữ lớn hơn */
+  margin-bottom: 15px;
+  color: #2c3e50; /* Màu đậm hơn cho tiêu đề */
+  font-family: 'Georgia', serif; /* Font chữ thanh lịch, hiện đại */
+}
+
+.text_gioithieu p {
+  font-size: 18px; /* Chữ to hơn cho đoạn văn */
+  line-height: 1.6; /* Khoảng cách dòng để dễ đọc hơn */
+  margin-bottom: 10px;
+}
+.tieudemenu{
+  text-align: justify; /* Căn đều */
+  font-family: 'Arial', sans-serif; /* Font chữ phù hợp xu hướng */
+  color: #333; /* Màu chữ */
+}
+.xemmonan_giaodien:hover{
+  text-decoration: underline;
+}

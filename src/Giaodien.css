@@ -1,0 +1,808 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+}
+
+/* Container for whole layout */
+.container_giaodien {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header_giaodien {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem; /* Giảm padding để header nhỏ hơn */
+  background-color: #fff3cd;
+  border-bottom: 2px solid #ffebcc;
+  position: sticky; /* Dùng position: sticky để header không bị ẩn khi kéo trang */
+  top: 0; /* Giữ header ở phía trên cùng */
+  z-index: 1000; /* Đảm bảo header luôn nằm trên cùng */
+  width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng */
+}
+
+/* Search bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Thêm khoảng cách giữa tìm kiếm và menu */
+}
+
+/* Đảm bảo ô tìm kiếm nằm ngay sát logo */
+.header_giaodien {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff3cd;
+  border-bottom: 2px solid #ffebcc;
+}
+
+/* Container của ô tìm kiếm */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa input và nút tìm */
+}
+
+/* Style cho ô input tìm kiếm */
+.search-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Style cho nút tìm kiếm */
+.btn_timkiem {
+  padding: 0.5rem 1rem;
+  background-color: #ff8c00;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* Ẩn nút tìm kiếm khi không có chữ trong ô nhập */
+.btn_timkiem {
+  display: none;
+}
+
+.search-input:not(:placeholder-shown) + .btn_timkiem {
+  display: inline-block;
+}
+
+/* Hiển thị nút khi ô nhập có nội dung */
+.search-input:focus + .btn_timkiem {
+  display: inline-block;
+}
+/* Chỉnh lại layout cho phần header */
+.header_giaodien {
+  display: flex;
+  justify-content: space-between; /* Đảm bảo logo và ô tìm kiếm nằm trên cùng một hàng */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  padding: 1rem;
+  background-color: #fff3cd;
+  border-bottom: 2px solid #ffebcc;
+}
+
+/* Cải tiến container ô tìm kiếm */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa input và nút tìm kiếm */
+  flex-grow: 1; /* Cho phép phần tìm kiếm chiếm hết không gian còn lại */
+}
+
+/* Chỉnh sửa ô input tìm kiếm */
+.search-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Style cho nút tìm kiếm */
+.btn_timkiem {
+  padding: 0.5rem 1rem;
+  background-color: #ff8c00;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* Ẩn nút tìm kiếm khi không có chữ trong ô nhập */
+.btn_timkiem {
+  display: none;
+}
+
+.search-input:not(:placeholder-shown) + .btn_timkiem {
+  display: inline-block;
+}
+
+/* Hiển thị nút khi ô nhập có nội dung */
+.search-input:focus + .btn_timkiem {
+  display: inline-block;
+}
+
+
+.search-input {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 250px; /* Độ rộng của khung tìm kiếm */
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #ff8c00; /* Đổi màu viền khi đang chọn */
+}
+
+.logo_giaodien {
+  height: 70px; /* Giảm kích thước logo */
+}
+
+.nav_giaodien {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.1rem; /* Giảm kích thước font của menu */
+}
+
+.nav_giaodien a {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Các phần tử trong nội dung */
+.main-content_giaodien {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap; /* Cho phép các phần tử lùi xuống dòng khi không đủ chỗ */
+  padding: 20px;
+}
+
+/* Các mục trong menu */
+.nav_giaodien span {
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px; /* Thêm border-radius để các góc mềm mại */
+  transition: all 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+}
+
+/* Hiệu ứng hover khi rê chuột vào */
+.nav_giaodien span:hover {
+  color: #fff; /* Đổi màu chữ thành trắng khi hover */
+  background-color: #FFD700; /* Đổi màu nền khi hover */
+  transform: scale(1.1); /* Tăng kích thước một chút khi hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng đổ bóng */
+}
+
+/* Thêm hiệu ứng cho menu con (submenu) khi hover */
+.menu-container_giaodien {
+  position: relative;
+}
+
+.submenu_giaodien {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: none; /* Ban đầu ẩn submenu */
+  flex-direction: column;
+  width: 150px;
+  z-index: 10;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Đặt opacity ban đầu là 0 */
+  transition: opacity 0.3s ease; /* Thêm hiệu ứng cho sự xuất hiện */
+}
+
+/* Khi hover vào phần menu-container, submenu sẽ hiển thị */
+.menu-container_giaodien:hover .submenu_giaodien {
+  display: flex;
+  opacity: 1; /* Đặt opacity là 1 khi submenu hiển thị */
+}
+
+.submenu_giaodien span {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Thêm hiệu ứng cho submenu item */
+}
+
+/* Hiệu ứng hover cho các mục trong submenu */
+.submenu_giaodien span:hover {
+  background-color: #f0f0f0;
+  padding-left: 15px; /* Di chuyển sang trái khi hover */
+}
+
+
+.main-content_giaodien > div {
+  flex: 1 1 30%; /* Mỗi phần tử sẽ chiếm 30% chiều rộng */
+  margin: 10px;
+  text-align: center;
+}
+
+/* Các mục menu */
+.nav_giaodien span {
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.nav_giaodien span:hover {
+  color: #000; /* Thay đổi màu chữ khi rê chuột vào */
+}
+
+/* Info Dropdown for User Info */
+.info-container_giaodien {
+  position: relative;
+}
+
+.info-dropdown_giaodien {
+  position: absolute;
+  top: 100%; /* Đảm bảo dropdown hiển thị ngay dưới nút thông tin */
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: none; /* Ban đầu ẩn dropdown */
+}
+
+/* Khi hover vào phần info-container, dropdown sẽ hiển thị */
+.info-container_giaodien:hover .info-dropdown_giaodien {
+  display: block;
+}
+
+.info-dropdown_giaodien p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+/* Submenu for Menu */
+.menu-container_giaodien {
+  position: relative;
+}
+
+.submenu_giaodien {
+  position: absolute;
+  top: 100%; /* Đảm bảo submenu hiển thị ngay dưới menu */
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: none; /* Ban đầu ẩn submenu */
+  flex-direction: column;
+  width: 150px;
+  z-index: 10;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Khi hover vào phần menu-container, submenu sẽ hiển thị */
+.menu-container_giaodien:hover .submenu_giaodien {
+  display: flex; /* Hiển thị submenu khi hover vào menu */
+}
+
+.submenu_giaodien span {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.submenu_giaodien span:hover {
+  background-color: #f0f0f0; /* Thêm hiệu ứng hover cho các mục trong submenu */
+}
+
+
+.logout-button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background-color: #ff8c00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #e07b00;
+}
+
+.info-button_giaodien {
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Responsive for small screen devices */
+@media (max-width: 1200px) {
+  .nav_giaodien {
+    font-size: 1rem;
+    gap: 15px;
+  }
+
+  .logo {
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header_giaodien {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav_giaodien {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+/* Footer chung */
+.footer_giaodien {
+  background-color: #fff3cd;
+  color: #333;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 2px solid #ffebcc;
+}
+
+/* Nội dung footer */
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;  /* Căn chỉnh các phần tử lên đầu */
+  padding: 20px;
+}
+
+/* Phần thông tin nhà hàng */
+.footer-left, .footer-center, .footer-right {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.footer-left h2, .footer-center h3, .footer-right h3 {
+  margin-bottom: 10px;
+}
+
+/* Danh sách liên kết */
+.footer-center ul, .footer-right ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-center li, .footer-right li {
+  margin: 5px 0;
+}
+
+.footer-center a, .footer-right a {
+  text-decoration: none;
+  color: #333;
+}
+
+.footer-center a:hover, .footer-right a:hover {
+  color: #ff8c00;
+}
+
+/* Footer bottom */
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+.search-results-container {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.search-results-header {
+  position: absolute; /* Đặt tiêu đề ở trên cùng */
+  top: 10px;
+  left: 50%; /* Căn giữa theo chiều ngang */
+  transform: translateX(-50%); /* Dịch chuyển để căn giữa */
+  background: rgba(255, 255, 255, 0.9); /* Nền mờ cho tiêu đề */
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10; /* Đảm bảo hiển thị trên grid */
+  text-align: center;
+}
+
+.search-results-title {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  padding-top: 70px; /* Để chừa khoảng trống cho tiêu đề */
+  width: 100%;
+}
+
+.search-results-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.search-results-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-results-item-image {
+  width: 100%;
+  height: 150px; /* Chiều cao cố định */
+  object-fit: cover; /* Giữ hình ảnh đẹp */
+}
+
+.search-results-item-name {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 10px 0;
+}
+
+.search-results-item-price {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.search-results-item-quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.search-results-item-input {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-results-item-button {
+  padding: 5px 10px;
+  background: #ff6f61;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-results-item-button:hover {
+  background: #e55a50;
+}
+.nav_giaodien .menu-item,
+.nav_giaodien .submenu-item {
+padding: 10px;
+cursor: pointer;
+text-decoration: none;
+}
+
+.nav_giaodien .menu-item.active,
+.nav_giaodien .submenu-item.active {
+border-bottom: 2px solid #000; /* Gạch chân dưới mục hiện tại */
+font-weight: bold;
+}
+
+.floating-buttons {
+position: fixed;
+bottom: 20px;
+right: 20px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+z-index: 1000;
+}
+
+.floating-button {
+background-color: #f5a623;
+color: #fff;
+border: none;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+font-size: 24px;
+transition: all 0.3s ease;
+}
+
+.floating-button:hover {
+transform: scale(1.1);
+background-color: #ff9100;
+}
+
+.floating-tooltip {
+position: absolute;
+right: 60px;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(0, 0, 0, 0.8);
+color: #fff;
+padding: 5px 10px;
+border-radius: 5px;
+font-size: 14px;
+white-space: nowrap;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+
+.floating-button:hover .floating-tooltip {
+opacity: 1;
+visibility: visible;
+}
+
+/* Tổng thể khung chat */
+.chatbox {
+position: fixed;
+bottom: 50px;
+right: 20px;
+width: 400px; /* Độ rộng mặc định */
+height: 500px; /* Độ cao mặc định */
+background: #ffffff;
+border: 1px solid #ccc;
+border-radius: 15px; /* Bo góc mềm mại */
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+z-index: 1000;
+display: flex;
+flex-direction: column;
+overflow: hidden; /* Ẩn các phần tử bị tràn */
+}
+
+/* Header của khung chat */
+.chatbox-header {
+padding: 15px;
+background: #007bff;
+color: #ffffff;
+font-weight: bold;
+font-size: 18px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-radius: 15px 15px 0 0; /* Bo góc chỉ ở phần trên */
+}
+
+.chatbox-header button {
+background: transparent;
+border: none;
+color: #fff;
+font-size: 18px;
+cursor: pointer;
+transition: transform 0.2s ease;
+}
+
+.chatbox-header button:hover {
+transform: scale(1.2); /* Hiệu ứng phóng to khi hover */
+}
+
+/* Nội dung chat */
+.chatbox-messages {
+flex: 1;
+padding: 15px;
+background: #f9f9f9;
+overflow-y: auto;
+max-height: calc(100% - 130px); /* Chiều cao trừ header và input */
+display: flex;
+flex-direction: column;
+justify-content: flex-start; /* Giữ nội dung bắt đầu từ trên */
+align-items: flex-start; /* Canh nội dung về bên trái */
+}
+
+/* Tin nhắn */
+.chatbox-message {
+margin-bottom: 10px;
+padding: 10px 15px;
+border-radius: 10px;
+font-size: 16px;
+line-height: 1.5;
+max-width: 70%;
+}
+
+.chatbox-user {
+background: #007bff;
+color: #ffffff;
+align-self: flex-end;
+}
+
+.chatbox-ai {
+background: #f1f1f1;
+color: #333;
+align-self: flex-start;
+}
+
+/* Input của khung chat */
+.chatbox-input-container {
+display: flex;
+align-items: center;
+padding: 15px;
+background: #ffffff;
+border-top: 1px solid #ddd;
+}
+
+.chatbox-input {
+flex: 1;
+padding: 12px 15px;
+border: 1px solid #ddd;
+border-radius: 25px; /* Bo góc tròn hơn */
+font-size: 16px;
+margin-right: 10px;
+outline: none;
+transition: border-color 0.3s ease;
+}
+
+.chatbox-input:focus {
+border-color: #007bff;
+}
+
+.chatbox-send-button {
+padding: 10px 20px;
+background: #007bff;
+color: #ffffff;
+border: none;
+border-radius: 25px;
+cursor: pointer;
+font-size: 16px;
+transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.chatbox-send-button:hover {
+background: #0056b3;
+transform: scale(1.05);
+}
+
+.phone-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.6); /* Làm tối nền */
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.phone-modal-content {
+background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Hiệu ứng chuyển màu nền */
+border: 1px solid #ddd;
+padding: 20px 30px;
+border-radius: 15px; /* Bo tròn các góc */
+text-align: center;
+width: 350px;
+box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng */
+animation: fadeIn 0.3s ease-in-out; /* Hiệu ứng xuất hiện */
+}
+
+.phone-modal-content h3 {
+font-size: 20px;
+font-weight: bold;
+color: #333;
+margin-bottom: 10px;
+}
+
+.phone-modal-content p {
+font-size: 16px;
+color: #666;
+margin-bottom: 20px;
+}
+
+.phone-modal-buttons {
+display: flex;
+justify-content: space-between;
+gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.call-button {
+background: #007bff;
+color: #fff;
+border: none;
+border-radius: 8px;
+padding: 10px 20px;
+font-size: 14px;
+font-weight: bold;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+.call-button:hover {
+background: #0056b3; /* Đổi màu khi hover */
+}
+
+.close-button {
+background: #f1f1f1;
+color: #333;
+border: none;
+border-radius: 8px;
+padding: 10px 20px;
+font-size: 14px;
+font-weight: bold;
+cursor: pointer;
+transition: background 0.3s ease, color 0.3s ease;
+}
+
+.close-button:hover {
+background: #ddd;
+color: #000;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: scale(0.9);
+}
+to {
+  opacity: 1;
+  transform: scale(1);
+}
+}
+.cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: fadeOut 3s forwards;
+}

@@ -1,0 +1,131 @@
+.menu-container_thucan {
+    padding: 20px;
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .menu-title_thucan {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .filter-container_thucan {
+    margin-bottom: 20px;
+  }
+  
+  .filter-container_thucan label {
+    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .filter-container_thucan select {
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
+  
+  .menu-grid_thucan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Mỗi cột rộng tối thiểu 250px */
+    gap: 15px;
+    justify-content: center; /* Căn giữa lưới */
+  }
+  
+  .menu-item_thucan {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .menu-item_thucan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .menu-item-image_thucan {
+    width: 100%; /* Chiều rộng 100% khung chứa */
+    height: 300px; /* Đặt chiều cao cố định */
+    object-fit: cover; /* Giữ tỉ lệ ảnh */
+  }
+  
+  
+  .menu-item-name_thucan {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .menu-item-price_thucan {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  
+  .menu-item-quantity_thucan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .menu-item-quantity_thucan input {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .menu-item-quantity_thucan button {
+    padding: 5px 10px;
+    background: #ff6f61;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .menu-item-quantity_thucan button:hover {
+    background: #e55a50;
+  }
+  .success-message_thucan {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: fadeOut 3s forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  .no-food-message {
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
