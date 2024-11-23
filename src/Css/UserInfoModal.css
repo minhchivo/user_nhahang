@@ -80,3 +80,125 @@
 .close-button:hover {
   background-color: #d32f2f;
 }
+
+.change-password-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.change-password-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.password-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.password-label span {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.password-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.password-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.confirm-password-button,
+.cancel-password-button {
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-password-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-password-button {
+  background-color: #f44336;
+}
+
+.cancel-password-button:hover {
+  background-color: #c0392b;
+}
+
+.toast {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.success-toast {
+  background-color: #e6ffe6;
+  color: #2d7f2d;
+  border: 1px solid #2d7f2d;
+}
+
+.error-toast {
+  background-color: #ffe6e6;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
+
+.toast {
+  margin: 10px 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.success-toast {
+  background: #e6ffe6;
+  color: #2d7f2d;
+  border: 1px solid #2d7f2d;
+}
+
+.error-toast {
+  background: #ffe6e6;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}

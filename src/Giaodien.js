@@ -8,6 +8,7 @@ import UserInfoModal from './Js/UserInfoModal';
 import Home from './Js/Home';
 import './Giaodien.css';
 
+
 function Giaodien({ userInfo, setUserInfo }) {
   const navigate = useNavigate();
   const [activePage, setActivePage] = useState('home');
@@ -23,48 +24,62 @@ function Giaodien({ userInfo, setUserInfo }) {
 
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false); // Điều khiển trạng thái modal
 
-  const sendMessage = async () => {
-    if (!userMessage.trim()) return;
+  
+  const sendMessage = async (messageText) => {
+  if (!messageText.trim()) return;
 
-    // Thêm tin nhắn người dùng
-    const newMessages = [...messages, { sender: 'user', text: userMessage }];
-    setMessages(newMessages);
-    setUserMessage('');
+  const timestamp = new Date().toISOString();
+  const newMessage = { sender: "user", text: messageText, timestamp };
 
-    // Gửi tin nhắn đến AI (ví dụ sử dụng ChatGPT API)
-    try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer YOUR_OPENAI_API_KEY`, // Thay bằng API Key của bạn
-        },
-        body: JSON.stringify({
-          model: 'gpt-4', // Hoặc "gpt-3.5-turbo"
-          messages: [{ role: 'user', content: userMessage }],
-        }),
-      });
+  // Cập nhật danh sách tin nhắn ngay lập tức
+  setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      const data = await response.json();
-      const aiReply = data.choices[0].message.content;
+  setUserMessage(""); // Xóa nội dung tin nhắn trong ô nhập
 
-      // Thêm tin nhắn từ AI
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: 'ai', text: aiReply },
-      ]);
-    } catch (error) {
-      console.error('Error fetching AI reply:', error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: 'ai', text: 'Xin chào, chúng tôi sẽ cố gắng phản hồi nhanh nhất có thể.' },
-      ]);
-    }
-  };
+  // Gửi tin nhắn tới backend
+  try {
+    await fetch("https://admin-quanlinhahang.onrender.com/api/save-message", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: userInfo?.userId || "guest",
+        text: messageText,
+        sender: "user",
+        timestamp,
+      }),
+    });
+  } catch (error) {
+    console.error("Lỗi khi gửi tin nhắn:", error);
+  }
+};
 
-  // Cuộn xuống dưới cùng khi có tin nhắn mới
+const fetchMessages = async () => {
+  try {
+    const response = await fetch(
+      `https://admin-quanlinhahang.onrender.com/api/get-messages?userId=${userInfo.userId}`
+    );
+    const data = await response.json();
+
+    // Kiểm tra và thêm các tin nhắn mới từ admin
+    setMessages((prevMessages) => {
+      const newMessages = data.messages || [];
+      if (newMessages.length > prevMessages.length) {
+        return [...prevMessages, ...newMessages.slice(prevMessages.length)];
+      }
+      return prevMessages; // Không cập nhật nếu không có tin nhắn mới
+    });
+  } catch (error) {
+    console.error("Lỗi khi lấy tin nhắn:", error);
+  }
+};
+
+  
+  
+  
+  
+  // Cuộn xuống cuối khi có tin nhắn mới
   useEffect(() => {
-    const chatMessages = document.querySelector('.chatbox-messages');
+    const chatMessages = document.querySelector(".chatbox-messages");
     if (chatMessages) {
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
@@ -74,10 +89,26 @@ function Giaodien({ userInfo, setUserInfo }) {
   const [addedToCartMessage, setAddedToCartMessage] = useState(''); // Thêm state cho thông báo
 
   useEffect(() => {
-    if (!userInfo) {
-      navigate('/');
-    }
-  }, [userInfo, navigate]);
+    // Polling tin nhắn mới mỗi 5 giây
+    const fetchMessages = async () => {
+      try {
+        const response = await fetch(
+          `https://admin-quanlinhahang.onrender.com/api/get-messages?userId=${userInfo.userId}`
+        );
+        const data = await response.json();
+        setMessages(data.messages || []);
+      } catch (error) {
+        console.error("Lỗi khi lấy tin nhắn:", error);
+      }
+    };
+  
+    fetchMessages(); // Lấy tin nhắn ban đầu
+    const interval = setInterval(fetchMessages, 5000); // Lấy tin nhắn mới mỗi 5 giây
+  
+    return () => clearInterval(interval); // Clear interval khi component unmount
+  }, [userInfo]);
+  
+  
 
   const handleSearch = () => {
     fetch(`https://admin-quanlinhahang.onrender.com/api/search?query=${searchQuery}`)
@@ -198,7 +229,7 @@ function Giaodien({ userInfo, setUserInfo }) {
   return (
     <div className="container_giaodien">
       <header className="header_giaodien">
-        <img src="./logo129.png" alt="logo" className="logo_giaodien" />
+        <img src="/logo129.png" alt="logo" className="logo_giaodien" />
         <div className="search-container">
           <input
             type="text"
@@ -346,44 +377,53 @@ function Giaodien({ userInfo, setUserInfo }) {
         {/* Chatbox */}
           {isChatBoxOpen && (
             <div className="chatbox">
-            <div className="chatbox-header">
-              <span>Chat</span>
-              <button onClick={() => setIsChatBoxOpen(false)}>✖</button>
-            </div>
-            <div className="chatbox-messages">
-              {messages.length === 0 ? (
-                <div style={{ textAlign: 'center', width: '100%' }}>
-                  <p style={{ color: '#aaa', marginTop: '50px' }}>
-                    Chào mừng! Hãy bắt đầu cuộc trò chuyện...
-                  </p>
-                </div>
-              ) : (
-                messages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`chatbox-message ${
-                      msg.sender === 'user' ? 'chatbox-user' : 'chatbox-ai'
-                    }`}
-                  >
-                    {msg.text}
-                  </div>
-                ))
-              )}
-            </div>
-            <div className="chatbox-input-container">
-              <input
-                type="text"
-                className="chatbox-input"
-                placeholder="Nhập tin nhắn..."
-                value={userMessage}
-                onChange={(e) => setUserMessage(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-              />
-              <button className="chatbox-send-button" onClick={sendMessage}>
-                Gửi
-              </button>
-            </div>
-          </div>
+  <div className="chatbox-header">
+    <span>Chat</span>
+    <button onClick={() => setIsChatBoxOpen(false)}>✖</button>
+  </div>
+  <div className="chatbox-messages">
+    {messages.length === 0 ? (
+      <div style={{ textAlign: "center", width: "100%" }}>
+        <p style={{ color: "#aaa", marginTop: "50px" }}>
+          Chào mừng! Hãy bắt đầu cuộc trò chuyện...
+        </p>
+      </div>
+    ) : (
+      messages.map((msg, index) => (
+        <div
+          key={index}
+          className={`chatbox-message ${
+            msg.sender === "user"
+              ? "chatbox-user"
+              : msg.sender === "ai"
+              ? "chatbox-ai"
+              : "chatbox-admin"
+          }`}
+        >
+          {msg.text} {/* Chỉ hiển thị nội dung `text` */}
+        </div>
+      ))
+    )}
+  </div>
+  <div className="chatbox-input-container">
+    <input
+      type="text"
+      className="chatbox-input"
+      placeholder="Nhập tin nhắn..."
+      value={userMessage}
+      onChange={(e) => setUserMessage(e.target.value)}
+      onKeyDown={(e) => e.key === "Enter" && sendMessage(userMessage)}
+    />
+    <button
+      className="chatbox-send-button"
+      onClick={() => sendMessage(userMessage)}
+    >
+      Gửi
+    </button>
+  </div>
+</div>
+
+
           )}
   
       </div>
