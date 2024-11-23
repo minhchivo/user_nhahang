@@ -67,6 +67,7 @@ function Home() {
               <p>Chào mừng đến với nhà hàng của chúng tôi! </p>
               <p>Với không gian ấm cúng và phong cách phục vụ tận tâm,</p> 
               <p>chúng tôi mong muốn mang đến cho bạn những trải nghiệm ẩm thực tuyệt vời. Tại đây, bạn sẽ tìm thấy một thực đơn phong phú, từ các món ăn truyền thống đậm đà hương vị Việt Nam đến những món ăn phương Tây hiện đại. Tất cả đều được chế biến từ nguyên liệu tươi ngon, chất lượng cao, đảm bảo sức khỏe và sự hài lòng của thực khách. Hãy đến và trải nghiệm, chúng tôi luôn sẵn sàng chào đón bạn!</p>
+              <p>Trân trọng!</p>
             </div>
 
             <div className="imagegioithieu">
