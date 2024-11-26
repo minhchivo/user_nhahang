@@ -76,7 +76,7 @@ function Home() {
           </div>
         </>
       ) : (
-        <Menu /> // Hiển thị trang menu khi activePage là 'menu'
+        <Menu /> 
       )}
     </div>
   );

@@ -166,7 +166,7 @@ function Cart({ userId }) {
     if (selectedPaymentMethod === 'cash') {
       processCashPayment();
     } else if (selectedPaymentMethod === 'transfer') {
-      showQrCode();
+      processVNPayPayment(); 
     }
   };
 
@@ -208,14 +208,49 @@ function Cart({ userId }) {
   
   
 
-  const showQrCode = () => {
-    alert('Hiển thị QR Code cho người dùng quét');
-    setShowPaymentModal(false);
+  const processVNPayPayment = async () => {
+    const payload = {
+      userId: Number(userId),
+      amount: cart.totalAmount,
+      orderInfo: 'Thanh toán đơn hàng',
+      returnUrl: 'http://localhost:3000/vnpay-return',
+      createdAt: new Date().toISOString(),
+    };
+  
+    console.log('Payload gửi lên backend:', payload);
+  
+    try {
+      const response = await fetch('https://admin-quanlinhahang.onrender.com/api/vnpay-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) {
+        console.error('Lỗi từ backend:', await response.text());
+        throw new Error('Lỗi khi tạo URL thanh toán VNPay');
+      }
+  
+      const data = await response.json();
+  
+      if (data.paymentUrl) {
+        console.log('URL thanh toán VNPay:', data.paymentUrl);
+        // Chuyển hướng người dùng tới URL thanh toán
+        window.location.href = data.paymentUrl; // Chuyển hướng trực tiếp
+      } else {
+        throw new Error('Không nhận được URL thanh toán từ backend');
+      }
+    } catch (error) {
+      console.error('Lỗi khi tạo URL thanh toán VNPay:', error);
+      setError('Lỗi khi tạo URL thanh toán.');
+      setTimeout(() => setError(null), 3000);
+    }
   };
-
-  if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
-  }
+  
+  
+  
 
 
       
