@@ -11,7 +11,9 @@ function Cart({ userId }) {
   const [showInvoices, setShowInvoices] = useState(false); // Hiển thị hóa đơn
   const [invoices, setInvoices] = useState([]);
 
-  
+  useEffect(() => {
+    window.timer = null;
+  }, []);
   useEffect(() => {
     if (userId) {
       fetch(`https://admin-quanlinhahang.onrender.com/api/cart/${userId}`)
