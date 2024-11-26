@@ -1,3 +1,5 @@
+window.timer = null;
+
 import React, { useEffect, useState } from 'react';
 import '../Css/Cart.css'
 
@@ -248,10 +250,6 @@ function Cart({ userId }) {
       setTimeout(() => setError(null), 3000);
     }
   };
-  
-  
-  
-
 
       
   return (
