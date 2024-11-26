@@ -1,5 +1,3 @@
-window.timer = null;
-
 import React, { useEffect, useState } from 'react';
 import '../Css/Cart.css'
 
