@@ -213,7 +213,7 @@ function Cart({ userId }) {
       userId: Number(userId),
       amount: cart.totalAmount,
       orderInfo: 'Thanh toán đơn hàng',
-      returnUrl: 'giaodiennguoidung.web.app/vnpay-return',
+      returnUrl: 'https://giaodiennguoidung.web.app/vnpay-return',
       createdAt: new Date().toISOString(),
     };
   
