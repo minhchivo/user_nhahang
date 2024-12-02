@@ -160,28 +160,9 @@
   background-color: #c0392b;
 }
 
+
+
 .toast {
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-.success-toast {
-  background-color: #e6ffe6;
-  color: #2d7f2d;
-  border: 1px solid #2d7f2d;
-}
-
-.error-toast {
-  background-color: #ffe6e6;
-  color: #d32f2f;
-  border: 1px solid #d32f2f;
-}
-
-/* .toast {
   margin: 10px 0;
   padding: 10px 20px;
   border-radius: 8px;
@@ -190,15 +171,3 @@
   gap: 10px;
   font-size: 1rem;
 }
-
-.success-toast {
-  background: #e6ffe6;
-  color: #2d7f2d;
-  border: 1px solid #2d7f2d;
-}
-
-.error-toast {
-  background: #ffe6e6;
-  color: #d32f2f;
-  border: 1px solid #d32f2f;
-} */
