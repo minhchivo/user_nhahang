@@ -11,9 +11,7 @@ function Cart({ userId }) {
   const [showInvoices, setShowInvoices] = useState(false); // Hiển thị hóa đơn
   const [invoices, setInvoices] = useState([]);
 
-  useEffect(() => {
-    window.timer = null;
-  }, []);
+  
   useEffect(() => {
     if (userId) {
       fetch(`https://admin-quanlinhahang.onrender.com/api/cart/${userId}`)
@@ -168,13 +166,14 @@ function Cart({ userId }) {
     if (selectedPaymentMethod === 'cash') {
       processCashPayment();
     } else if (selectedPaymentMethod === 'transfer') {
-      processVNPayPayment(); 
+      processVNPayPayment();
     }
   };
+  
 
   const processCashPayment = () => {
     const payload = {
-      userId: Number(userId), // Chuyển thành số nếu cần
+      userId: Number(userId),
       items: cart.items,
       totalAmount: cart.totalAmount,
       paymentMethod: 'cash',
@@ -196,6 +195,15 @@ function Cart({ userId }) {
         return response.json();
       })
       .then(() => {
+        // Gửi yêu cầu để xóa sản phẩm khỏi giỏ hàng sau khi thanh toán
+        return fetch(`https://admin-quanlinhahang.onrender.com/api/cart/${userId}/clear`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      })
+      .then(() => {
         setCart({ items: [], totalAmount: 0 });
         setSuccessMessage('Thanh toán thành công!');
         setShowPaymentModal(false);
@@ -209,20 +217,14 @@ function Cart({ userId }) {
   };
   
   
-
+  
   const processVNPayPayment = async () => {
-    const payload = {
-      userId: Number(userId),
-      amount: cart.totalAmount,
-      orderInfo: 'Thanh toán đơn hàng',
-      returnUrl: 'https://giaodiennguoidung.web.app/vnpay-return',
-      createdAt: new Date().toISOString(),
-    };
-  
-    console.log('Payload gửi lên backend:', payload);
-  
     try {
-      const response = await fetch('https://admin-quanlinhahang.onrender.com/api/vnpay-payment', {
+      const payload = {
+        amount: cart.totalAmount,  // Số tiền thanh toán
+      };
+  
+      const response = await fetch('https://admin-quanlinhahang.onrender.com/create_payment_url', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -230,26 +232,24 @@ function Cart({ userId }) {
         body: JSON.stringify(payload),
       });
   
-      if (!response.ok) {
-        console.error('Lỗi từ backend:', await response.text());
-        throw new Error('Lỗi khi tạo URL thanh toán VNPay');
-      }
-  
       const data = await response.json();
   
       if (data.paymentUrl) {
-        console.log('URL thanh toán VNPay:', data.paymentUrl);
-        // Chuyển hướng người dùng tới URL thanh toán
-        window.location.href = data.paymentUrl; // Chuyển hướng trực tiếp
+        // Chuyển hướng đến URL thanh toán
+        window.location.href = data.paymentUrl;
       } else {
-        throw new Error('Không nhận được URL thanh toán từ backend');
+        throw new Error('Không nhận được URL thanh toán');
       }
     } catch (error) {
-      console.error('Lỗi khi tạo URL thanh toán VNPay:', error);
-      setError('Lỗi khi tạo URL thanh toán.');
-      setTimeout(() => setError(null), 3000);
+      console.error('Lỗi xử lý thanh toán VNPay:', error);
+      setError(`Lỗi thanh toán: ${error.message}`);
     }
   };
+  
+  
+  
+  
+
 
       
   return (
@@ -319,34 +319,35 @@ function Cart({ userId }) {
         <button className="checkout-button" onClick={handleCheckout}>Thanh toán</button>
       </div>
       {showPaymentModal && (
-        <div className="payment-modal">
-          <h3>Chọn phương thức thanh toán</h3>
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="cash"
-                checked={selectedPaymentMethod === 'cash'}
-                onChange={() => setSelectedPaymentMethod('cash')}
-              />
-              Tiền mặt
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="transfer"
-                checked={selectedPaymentMethod === 'transfer'}
-                onChange={() => setSelectedPaymentMethod('transfer')}
-              />
-              Chuyển khoản
-            </label>
-          </div>
-          <button onClick={handleConfirmPayment}>Xác nhận</button>
-          <button onClick={() => setShowPaymentModal(false)}>Hủy</button>
-        </div>
-      )}
+  <div className="payment-modal">
+    <h3>Chọn phương thức thanh toán</h3>
+    <div>
+      <label>
+        <input
+          type="radio"
+          name="paymentMethod"
+          value="cash"
+          checked={selectedPaymentMethod === 'cash'}
+          onChange={() => setSelectedPaymentMethod('cash')}
+        />
+        Tiền mặt
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="paymentMethod"
+          value="transfer"
+          checked={selectedPaymentMethod === 'transfer'}
+          onChange={() => setSelectedPaymentMethod('transfer')}
+        />
+        Chuyển khoản
+      </label>
+    </div>
+    <button onClick={handleConfirmPayment}>Xác nhận</button>
+    <button onClick={() => setShowPaymentModal(false)}>Hủy</button>
+  </div>
+)}
+
       {showInvoices && (
   <div className="invoice-modal">
     <h3>Danh sách hóa đơn</h3>

@@ -16,7 +16,7 @@ function Giaodien({ userInfo, setUserInfo }) {
   const [searchResults, setSearchResults] = useState([]);
   const [showInfo, setShowInfo] = useState(false);
   const [showSubMenu, setShowSubMenu] = useState(false);
-  const [cart] = useState({}); // Lưu giỏ hàng dưới dạng đối tượng
+  const [cart] = useState({}); // Lưu giỏ hàng dưới dạng đối tượng 
 
   const [isChatBoxOpen, setIsChatBoxOpen] = useState(false); // Điều khiển trạng thái chatbox
   const [messages, setMessages] = useState([]); // Lưu trữ các tin nhắn trong chat
@@ -53,25 +53,7 @@ function Giaodien({ userInfo, setUserInfo }) {
   }
 };
 
-const fetchMessages = async () => {
-  try {
-    const response = await fetch(
-      `https://admin-quanlinhahang.onrender.com/api/get-messages?userId=${userInfo.userId}`
-    );
-    const data = await response.json();
 
-    // Kiểm tra và thêm các tin nhắn mới từ admin
-    setMessages((prevMessages) => {
-      const newMessages = data.messages || [];
-      if (newMessages.length > prevMessages.length) {
-        return [...prevMessages, ...newMessages.slice(prevMessages.length)];
-      }
-      return prevMessages; // Không cập nhật nếu không có tin nhắn mới
-    });
-  } catch (error) {
-    console.error("Lỗi khi lấy tin nhắn:", error);
-  }
-};
 
   
   
@@ -89,24 +71,38 @@ const fetchMessages = async () => {
   const [addedToCartMessage, setAddedToCartMessage] = useState(''); // Thêm state cho thông báo
 
   useEffect(() => {
-    // Polling tin nhắn mới mỗi 5 giây
+    // Hàm fetchMessages được khai báo bên trong useEffect
     const fetchMessages = async () => {
       try {
         const response = await fetch(
           `https://admin-quanlinhahang.onrender.com/api/get-messages?userId=${userInfo.userId}`
         );
         const data = await response.json();
-        setMessages(data.messages || []);
+  
+        // Kiểm tra và thêm các tin nhắn mới từ admin
+        setMessages((prevMessages) => {
+          const newMessages = data.messages || [];
+          if (newMessages.length > prevMessages.length) {
+            return [...prevMessages, ...newMessages.slice(prevMessages.length)];
+          }
+          return prevMessages; // Không cập nhật nếu không có tin nhắn mới
+        });
       } catch (error) {
         console.error("Lỗi khi lấy tin nhắn:", error);
       }
     };
   
-    fetchMessages(); // Lấy tin nhắn ban đầu
-    const interval = setInterval(fetchMessages, 5000); // Lấy tin nhắn mới mỗi 5 giây
+    // Gọi hàm fetchMessages
+    fetchMessages();
   
-    return () => clearInterval(interval); // Clear interval khi component unmount
-  }, [userInfo]);
+    // Cập nhật tin nhắn mới mỗi 5 giây
+    const interval = setInterval(fetchMessages, 1000);
+  
+    // Cleanup: clearInterval khi component unmount
+    return () => clearInterval(interval);
+  }, [userInfo]); // useEffect chạy lại khi userInfo thay đổi
+  
+  
   
   
 
@@ -281,11 +277,12 @@ const fetchMessages = async () => {
             BookTable
           </span>
           <span
-            className={`menu-item ${activePage === 'cart' ? 'active' : ''}`}
-            onClick={() => setActivePage('cart')}
-          >
-            Giỏ Hàng
-          </span>
+              className={`menu-item ${activePage === 'cart' ? 'active' : ''}`}
+              onClick={() => setActivePage('cart')}
+            >
+              Giỏ Hàng
+            </span>
+
           <div
             className="info-container_giaodien"
             onMouseEnter={() => setShowInfo(true)}
